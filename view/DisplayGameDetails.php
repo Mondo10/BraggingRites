@@ -37,7 +37,7 @@
 
     <div class = "formrow">
         <label>ERSB</label>
-        <?php echo $row['ERSB']; ?>
+        <?php echo $row['ESRB']; ?>
     </div>
 
     <div class = "formrow">
