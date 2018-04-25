@@ -43,5 +43,12 @@
             "../controller/controller.php?action=GameDetails&GameID=" +
             $('#GameSelect').val();
     }
+
+
+
+
+
+
+    
 </script>
 
