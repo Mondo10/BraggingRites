@@ -14,6 +14,9 @@ switch ($action) {
     case 'About':
         include '../view/About.php';
         break;
+    case 'AddGame':
+        addGame();
+        break;
     case 'EmailSend':
         include '../view/EmailSend.php';
         break;
@@ -34,6 +37,9 @@ switch ($action) {
         break;
     case 'TopGames':
         listGames();
+        break;
+    case 'ProcessAddEdit':
+        processAddEdit();
         break;
     case 'Brackets':
     include '../view/Brackets.php';
@@ -97,17 +103,22 @@ function DisplayGame()
 
 }
 
+
+
 function listGames() {
-    $listType = $_GET['ListType'];
-    if ($listType == 'ERSB') {
-        $results = getMatureRatedgames();
-    }else if ($listType == 'ERSB') {
-        $results = getMatureRatedgames();
-    }else {
+    if(isset( $_POST['ListType']))
+    {
+        $listType = $_GET['ListType'];
+        if ($listType == 'ERSB') {
+            $results = getMatureRatedgames();
+        }else if ($listType == 'ERSB') {
+            $results = getMatureRatedgames();
+            }
+        }else {
+            $results = getallgames();
+        }
         $results = getallgames();
-    }
-    $results = getallgames();
-        include '../view/listForm.php';
+            include '../view/listForm.php';
 
 }
 
@@ -120,6 +131,67 @@ function searchGames(){
     } else {
         include '../view/SearchGames.php';
     }
+}
+
+function addGame() {
+    $mode = "add";
+    $name = "";
+    $DateRelease = "";
+    $MetacriticScore =  0;
+    $Price = 0;
+    $HavePlayed = "Y";
+    $Genre = "";
+    $ESRB = "";
+
+
+    include '../view/editGames.php';
+}
+
+function processAddEdit() {
+    print_r($_POST);
+    $name = $_POST['Name'];
+    $MetacriticScore = $_POST['MetacriticScore'];
+    $Genre = $_POST['Genre'];
+    $Price = $_POST['Price'];
+    $ESRB = $_POST['ESRB'];
+    if (isset($_POST['HavePlayed'])) {
+        $HavePlayed = 'Y';
+    } else {
+        $HavePlayed = 'N';
+    }
+    $DateRelease = $_POST['DateRelease'];
+
+    // Validations
+    $errors = "";
+    if (empty($name) || strlen($name) > 30) {
+        $errors .= "\\n* Name is required and must be no more than 30 characters.";
+    }
+    if (!empty($DateRelease) && !strtotime($DateRelease)) {
+        $errors .= "\\n* Either leave the date blank or provide a valid date.";
+    }
+    if (empty($MetacriticScore) && !ctype_digit($MetacriticScore)) {
+        $errors .= "\\n* mcScore is required and must be no more than 30 characters.";
+    } else if (empty ($Price)) {
+        $MetacriticScore = 0;
+    }
+
+    if (empty($Genre) || strlen($Genre) > 20) {
+        $errors .= "\\n* Genre must be no more than 20 characters.";
+    }
+    if (!empty($Price) && !is_numeric($Price)) {
+        $errors .= "\\n* Price level must be numeric.  Enter 0 if unknown.";
+    } else if (empty ($Price)) {
+        $Price = 0;
+    }
+    if (!empty($ESRB) || strlen($ESRB) > 4) {
+        $errors .= "\\something wrong with esrb";
+
+    }
+
+    if ($errors != "") {
+        include '../view/editGames.php';
+    }
+
 }
 
 ?>

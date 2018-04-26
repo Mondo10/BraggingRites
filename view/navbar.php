@@ -18,11 +18,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="../controller/controller.php?action=Register">Register</a>
             </li>
-            <li class="nav-item">
-                <ul>
-                    <li> <a class="nav-link" href="../controller/controller.php?action=TopGames">Top Games</a></li>
-                    <li><a class="nav-link" href="../controller/controller.php?action=SearchGames">Search Games</a></li>
-                </ul></li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="../controller/controller.php?action=TopGames">Top Games</a>
+                    <a class="dropdown-item" href="../controller/controller.php?action=SearchGames">Search Games</a>
+                    <a class="dropdown-item" href="../controller/controller.php?action=AddGame">Add Game</a>
+                </div>
+            </li>
+
+
             <li class="nav-item">
                 <a class="nav-link" href="../controller/controller.php?action=FAQ">FAQ</a>
             </li>
