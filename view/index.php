@@ -7,6 +7,15 @@ include '../view/Header.php'
         <h1 class = text-white>Bragging Rites </h1>
         <p class="lead">Welcome to Bragging Rites.com for everything video games! </p>
       </div>
+        <div style="text-align: right; font-size: 16px;">
+            <?php
+                if (!loggedIn()) {
+                    echo "<a href-'../security/index.php?action=securityLogIn&RequestedPage=../controller/controller.php?action=Home'>Log In </a>";
+                    }else {
+                   echo "<a href-'../security/index.php?action=securityLogIn&RequestedPage=../controller/controller.php?action=Home'>Log Out "  .$_SESSION['UserName'] . " </a>";
+                }
+            ?>
+        </div>
 
         <div class="spacer"></div>
 
