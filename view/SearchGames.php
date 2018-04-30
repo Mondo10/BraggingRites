@@ -52,17 +52,11 @@
             "../controller/controller.php?action=GameDetails&GameID=" +
             $('#GameSelect').val();
     }
-    function gameLookup(){
+    function generalSearch(){
         document.location =
-            "../controller/controller.php?action=GameDetails&GameID=" +
-            $('#GameSelect').val();
+            "../controller/controller.php?action=listGames&ListType=GeneralSearch&Criteria=" +
+            $('#Criteria').val();
     }
 
-
-
-
-
-
-    
 </script>
 

@@ -10,9 +10,9 @@ include '../view/Header.php'
         <div style="text-align: right; font-size: 16px;">
             <?php
                 if (!loggedIn()) {
-                    echo "<a href-'../security/index.php?action=securityLogIn&RequestedPage=../controller/controller.php?action=Home'>Log In </a>";
+                    echo "<a href='''../security/index.php?action=securityLogIn&RequestedPage=../controller/controller.php?action=Home'>Log In </a>";
                     }else {
-                   echo "<a href-'../security/index.php?action=securityLogIn&RequestedPage=../controller/controller.php?action=Home'>Log Out "  .$_SESSION['UserName'] . " </a>";
+                   echo "<a href='''../security/index.php?action=securityLogIn&RequestedPage=../controller/controller.php?action=Home'>Log Out "  . $_SESSION['UserName'] . " </a>";
                 }
             ?>
         </div>
