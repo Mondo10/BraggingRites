@@ -112,6 +112,42 @@ function getHavePlayedgames()
 
     }
 }
+
+    function insertGame($name, $DateRelease, $MetacriticScore, $Price, $HavePlayed, $Genre, $ESRB) {
+        $db = getDBConnection();
+        $query = 'INSERT INTO games (Name, DateRelease, MetacriticScore, Price, HavePlayed, Genre, ESRB)
+                VALUES (:Name, :DateRelease, :MetacriticScore, :Price, :HavePlayed, :Genre, :ESRB)';
+        $statement = $db->prepare($query);
+
+        $statement->bindValue(':Name', $name);
+        if (empty($DateRelease)){		// Date may be blank so store a Null
+            $statement->bindValue(':DateRelease', null, PDO::PARAM_NULL);
+        } else {
+            $statement->bindValue(':DateRelease', toMySQLDate($DateRelease));
+        }
+        $statement->bindValue(':MetacriticScore', $MetacriticScore);
+        $statement->bindValue(':Price', $Price);
+        $statement->bindValue(':HavePlayed', $HavePlayed);
+        $statement->bindValue(':Genre', $Genre);
+        $statement->bindValue(':ESRB', $ESRB);
+
+
+
+        $success = $statement->execute();
+        $statement->closeCursor();
+
+        if ($success) {
+            return $db->lastInsertId(); // Get generated BeerID
+        } else {
+            logSQLError($statement->errorInfo());  // Log error to debug
+        }
+    }
+
+    function logSQLError($errorInfo) {
+        $errorMessage = $errorInfo[2];
+        include '../view/errorPage.php';
+    }
+
 function GetGameDetails($gameid)
 {
     try {
@@ -150,5 +186,12 @@ function getMembers() {
     return $memberArray;
 }
 
-?>
+function toMySQLDate($date) {
+    if ($phpDate = strtotime($date)) {
+        return date('Y/m/d', $phpDate);
+    } else {
+        return "";
+    }
+}
 
+?>

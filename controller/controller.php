@@ -167,7 +167,7 @@ function addGame() {
 }
 
 function processAddEdit() {
-    print_r($_POST);
+    //print_r($_POST);
     $name = $_POST['Name'];
     $MetacriticScore = $_POST['MetacriticScore'];
     $Genre = $_POST['Genre'];
@@ -202,7 +202,7 @@ function processAddEdit() {
     } else if (empty ($Price)) {
         $Price = 0;
     }
-    if (!empty($ESRB) || strlen($ESRB) > 4) {
+    if (empty($ESRB) || strlen($ESRB) > 4) {
         $errors .= "\\something wrong with esrb";
 
     }
@@ -210,8 +210,11 @@ function processAddEdit() {
     if ($errors != "") {
         include '../view/editGames.php';
     }
+    else {
+        $GameID = insertGame($name, $DateRelease, $MetacriticScore, $Price, $HavePlayed, $Genre, $ESRB);
+        header("Location:../controller/controller.php?action=DisplayGameDetails&GameID=$GameID");
+    }
 
 }
 
 ?>
-
