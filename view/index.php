@@ -1,6 +1,8 @@
 <?php
 
+
 include '../view/Header.php'
+
     ?>
 
       <div class="Coleman-template">
