@@ -22,7 +22,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="../controller/controller.php?action=TopGames">Top Games</a>
+                    <a class="dropdown-item" href="../controller/controller.php?action=TopGames&ListType=Top">Top Games</a>
                     <a class="dropdown-item" href="../controller/controller.php?action=SearchGames">Search Games</a>
                     <a class="dropdown-item" href="../controller/controller.php?action=AddGame">Add Game</a>
                 </div>
@@ -32,11 +32,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="../controller/controller.php?action=FAQ">FAQ</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../security/index.php">Security</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="../controller/controller.php?action=About">About us</a>
-                    <a class="dropdown-item" href="#">Contact info</a>
+                    <a class="dropdown-item" href="..controller/controller">Contact info</a>
                     <a class="dropdown-item" href="../controller/controller.php?action=EmailSend">Email</a>
                     <a class="dropdown-item" href="../controller/controller.php?action=RegisterMember">Sign up stuff!</a>
                     <a class="dropdown-item" href="../controller/controller.php?action=FileUpload">upload file!</a>

@@ -1,4 +1,6 @@
 <?php
+session_start();
+require_once("../security/model.php");
 require_once '../model/model.php';
 
 if (isset($_POST['action'])) {  // check get and post
@@ -10,64 +12,75 @@ if (isset($_POST['action'])) {  // check get and post
     exit();
 }
 
-switch ($action) {
-    case 'About':
-        include '../view/About.php';
-        break;
-    case 'AddGame':
-        addGame();
-        break;
-    case 'EmailSend':
-        include '../view/EmailSend.php';
-        break;
-    case 'FileUpload':
-        include '../view/fileUpload.php';
-        break;
-    case 'quoteUpload':
-        include '../view/quoteUpload.php';
-        break;
-    case 'Home':
-        include '../view/index.php';
-        break;
-    case 'imageUpload':
-        include '../view/imageUpload.php';
-        break;
-    case 'Register':
-        include '../view/Register.php';
-        break;
-    case 'TopGames':
-        listGames();
-        break;
-    case 'ProcessAddEdit':
-        processAddEdit();
-        break;
-    case 'Brackets':
-    include '../view/Brackets.php';
-    break;
-    case 'calendar':
-        include '../view/calendar.php';
-        break;
-    case 'GameDetails':
-        DisplayGame();
-        break;
 
-    case 'SearchGames':
-        searchGames();
-        break;
+if (!userIsAuthorized($action)) {
+    if(!loggedIn()) {
+        header("Location:../security/index.php?action=SecurityLogin&RequestedPage=" . urlencode($_SERVER['REQUEST_URI']));
+    } else {
+        include('../security/not_authorized.html');
+    }
+} else {
+        switch ($action) {
+            case 'About':
+                include '../view/About.php';
+                break;
+            case 'AddGame':
+                addGame();
+                break;
+            case 'EmailSend':
+                include '../view/EmailSend.php';
+                break;
+            case 'FileUpload':
+                include '../view/fileUpload.php';
+                break;
+            case 'quoteUpload':
+                include '../view/quoteUpload.php';
+                break;
+            case 'Home':
+                include '../view/index.php';
+                break;
+            case 'imageUpload':
+                include '../view/imageUpload.php';
+                break;
+            case 'Register':
+                include '../view/Register.php';
+                break;
+            case 'TopGames':
+                listGames();
+                break;
+            case 'ProcessAddEdit':
+                processAddEdit();
+                break;
+            case 'Brackets':
+                include '../view/Brackets.php';
+                break;
+            case 'calendar':
+                include '../view/calendar.php';
+                break;
+            case 'GameDetails':
+                DisplayGame();
+                break;
+            case 'listGames':
+                listGames();
+                break;
 
-    case 'FAQ':
-        include '../view/FAQ.php';
-        break;
-    case 'ProcessRegisterMember':
-        processRegisterMember();
-        break;
-    case 'RegisterMember':
-        include '../view/registerMember.php';
-        break;
-    default:
-        include('../view/index.php');   // default
-}
+            case 'SearchGames':
+                searchGames();
+                break;
 
+            case 'FAQ':
+                include '../view/FAQ.php';
+                break;
+            case 'ProcessRegisterMember':
+                processRegisterMember();
+                break;
+            case 'RegisterMember':
+                include '../view/registerMember.php';
+                break;
+            default:
+                include('../view/index.php');   // default
+        }
+    }
 function processRegisterMember() {
     $firstName = $_POST['FirstName'];
     $lastName = $_POST['LastName'];
@@ -106,19 +119,25 @@ function DisplayGame()
 
 
 function listGames() {
-    if(isset( $_POST['ListType']))
+    $listType = $_GET['ListType'];
+    if ($listType == 'ERSB') {
+        $results = getMatureRatedgames();
+    }else if ($listType == 'Haveplayed') {
+        $results = getHavePlayedgames();
+    }
+    else if ($listType == 'GeneralSearch') {
+        $results = getByGeneralSearch($_GET['Criteria']);
+    }
+    else if ($listType=='Top')
     {
-        $listType = $_GET['ListType'];
-        if ($listType == 'ERSB') {
-            $results = getMatureRatedgames();
-        }else if ($listType == 'ERSB') {
-            $results = getMatureRatedgames();
-            }
-        }else {
-            $results = getallgames();
-        }
         $results = getallgames();
-            include '../view/listForm.php';
+    }
+    else
+    {
+        echo "no games";
+    }
+
+    include '../view/listForm.php';
 
 }
 
