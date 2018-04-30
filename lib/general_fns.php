@@ -8,4 +8,12 @@ function toDisplayDate($date) {
     }
 }
 
+function toMySQLDate($date) {
+    if ($phpDate = strtotime($date)) {
+        return date('Y/m/d', $phpDate);
+    } else {
+        return "";
+    }
+}
+
 ?>
