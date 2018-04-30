@@ -38,6 +38,7 @@ function getallgames()
     }
     catch (PDOException $e)
     {
+        echo $e->getMessage();
         die;
 
 
@@ -45,11 +46,36 @@ function getallgames()
     }
 }
 
+function getByGeneralSearch($criteria){
+    try {
+        $db = getDBConnection();
+        $query = "SELECT * FROM games 
+                  WHERE Name LIKE :criteria OR Genre LIKE :criteria OR ERSB LIKE :criteria";
+        $statement = $db->prepare($query);
+        $statement->bindValue(':criteria',"%$criteria%");
+        $statement->execute();
+        $results = $statement-> fetchAll();
+        $statement->closeCursor();
+        return $results;
+    }
+    catch (PDOException $e)
+    {
+        echo $e->getMessage();
+        die;
+
+
+
+    }
+
+
+
+}
+
 function getMatureRatedgames()
 {
     try {
         $db = getDBConnection();
-        $query = "select * from games WHERE ESRB = 'M'  order by Name";
+        $query = "select * from games WHERE ERSB = 'M'  order by Name";
         $statement = $db->prepare($query);
         $statement->execute();
         $results = $statement-> fetchAll();
@@ -58,6 +84,7 @@ function getMatureRatedgames()
     }
     catch (PDOException $e)
     {
+        echo $e->getMessage();
         die;
 
 
@@ -69,7 +96,7 @@ function getHavePlayedgames()
 {
     try {
         $db = getDBConnection();
-        $query = "select * from games WHERE HavePlayed = 'Y' order by Name";
+        $query = "select * from games WHERE HavePlayed = 'y' order by Name";
         $statement = $db->prepare($query);
         $statement->execute();
         $results = $statement-> fetchAll();
@@ -78,6 +105,7 @@ function getHavePlayedgames()
     }
     catch (PDOException $e)
     {
+        echo $e->getMessage();
         die;
 
 
