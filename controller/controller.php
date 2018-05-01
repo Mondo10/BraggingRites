@@ -63,11 +63,9 @@ if (!userIsAuthorized($action)) {
             case 'listGames':
                 listGames();
                 break;
-
             case 'SearchGames':
                 searchGames();
                 break;
-
             case 'FAQ':
                 include '../view/FAQ.php';
                 break;
