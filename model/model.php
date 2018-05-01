@@ -94,6 +94,7 @@ function GetGameDetails($gameid)
         $statement->bindValue(':gameid',$gameid);
         $statement->execute();
         $row = $statement-> fetch();
+        $row['GameImagePath'] = getGameImagePath($gameid);
         $statement->closeCursor();
         return $row;
     }
@@ -105,6 +106,17 @@ function GetGameDetails($gameid)
 
     }
 }
+function getGameImagePath($gameID)
+{
+    $gameImageDirectory = "../DataFiles/Images";
+    $gameFilePath = "$gameImageDirectory/$gameID.jpg";
+    if (is_file($gameFilePath)) {
+        return $gameFilePath;
+    } else {
+        return "";
+    }
+}
+
 
 function saveMemberInfo($firstName, $lastName, $age, $email) {
     $file = fopen('../DataFiles/members.csv', 'ab');

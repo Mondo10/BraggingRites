@@ -62,6 +62,14 @@
 
 </div>
 
+<?php if ($row['GameImagePath'] != "") { ?>
+    <div id = "gameImage">
+        <img src ="<?php echo $row['GameImagePath'] ?>" alt ="Game Image"
+            height="280" width="220">
+    </div>
+<?php } ?>
+
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
