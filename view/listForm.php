@@ -43,7 +43,7 @@
             </td>
             <td> <?php echo $row ['Genre']?></td>
              <td> <?php echo $row ['MetacriticScore']?></td>
-              <td> <?php echo $row ['ERSB']?></td>
+              <td> <?php echo $row ['ESRB']?></td>
         </tr>
                 <?php }?>
 

@@ -1,12 +1,23 @@
 <?php
 
+
 include '../view/Header.php'
+
     ?>
 
       <div class="Coleman-template">
         <h1 class = text-white>Bragging Rites </h1>
         <p class="lead">Welcome to Bragging Rites.com for everything video games! </p>
       </div>
+        <div style="text-align: right; font-size: 16px;">
+            <?php
+                if (!loggedIn()) {
+                    echo "<a href=\"../security/index.php?action=SecurityLogin&amp;RequestedPage=%2FBraggingrites%2Fsecurity%2Findex.php\">Log In</a> </a>";
+                    }else {
+                   echo "<a <a href=\"../security/index.php?action=SecurityLogOut\">Log Out</a>"  . $_SESSION['UserName'] . " </a>";
+                }
+            ?>
+        </div>
 
         <div class="spacer"></div>
 
