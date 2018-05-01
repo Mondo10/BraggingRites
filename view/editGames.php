@@ -1,5 +1,5 @@
 <?php
-$title = "add game";
+$title = "$mode game";
 require '../view/Header.php'
 ?>
 <head>
@@ -22,12 +22,14 @@ require '../view/Header.php'
 
 </head>
 <div class="detailForm">
-    <h1>Add Game</h1>
+    <h1><?php echo $mode ?> Game</h1>
 
     <form id="GameForm" action="../controller/controller.php?action=ProcessAddEdit" method="post"
           onsubmit="return validateForm();">
+        <input type="hidden" name="GameID" value="<?php echo $GameID ?>" />
+        <input type="hidden" name="Mode" value="<?php echo $mode ?>" />
         <div class="formRow">
-            <label for="Name">Game Name:</label>
+            <label for="Name">Game Name:<span class="required">*</span></label>
             <input type="text" name="Name" id="Name" value="<?php echo $name ?>" required
                    required size="20" maxlength="30" autofocus/>
         </div>
@@ -56,7 +58,7 @@ require '../view/Header.php'
             <input type="text" name="Genre" id="Genre" value="<?php echo $Genre ?>"/>
         </div>
         <div class="formRow">
-            <label for="ESRB">ESRB:</label>
+            <label for="ESRB">ESRB:<span class="required">*</span></label>
             <input type="text" name="ESRB" id="ESRB" value="<?php echo $ESRB ?>"/>
         </div>
 

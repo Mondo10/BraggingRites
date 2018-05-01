@@ -60,6 +60,13 @@
         <?php echo $row['HavePlayed']; ?>
     </div>
 
+    <div class = "formrow">
+        <input type="button" name="EditButton" id="EditButton" value="Edit"
+               onclick="document.location='../controller/controller.php?action=editGames&GameID=<?php echo $row['GameID'] ?>';" />
+        <input type="button" name="DeleteButton" id="DeleteButton" value="Delete" style="margin-left: 30px"
+               onclick="document.location='../controller/controller.php?action=DeleteGame&GameID=<?php echo $row['GameID'] ?>';" />
+    </div>
+
 </div>
 
 <!-- Bootstrap core JavaScript
